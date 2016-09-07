@@ -20,11 +20,12 @@ RUN apt-get update && apt-get install -y \
         make \
         bzip2 \
         apt-transport-https \
-        ca-certificates
+        ca-certificates \
+        && rm -rf /var/lib/apt/lists/*
 
 RUN apt-key adv --keyserver hkp://p80.pool.sks-keyservers.net:80 --recv-keys 58118E89F3A912897C070ADBF76221572C52609D
 COPY docker.list /etc/apt/sources.list.d/docker.list
-RUN apt-get update && apt-get install -y docker-engine
+RUN apt-get update && apt-get install -y docker-engine && rm -rf /var/lib/apt/lists/*
 
 RUN usermod -aG docker jenkins
 
